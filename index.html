@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <link rel="stylesheet" href="color.css">
+</head>
+<body>
+    <header>
+        <h1>Calculadora</h1>
+        <h1>Explicación del código</h1>
+        <p>para lograr identificar cada button les di un id los identifico con la funcion obtenerElemento
+            la funcion recibe un parametro llamado id que es el id del boton que se presiono y se lo pasa a 
+            document.getElementById(id) para obtener el boton que se presiono y se lo pasa a la funcion añadir y 
+            me devuelve el valor del boton que se presiono y lo agrega a la pantalla con la funcion añadirNumero
+            la funcion añadirNumero recibe un parametro llamado valor que es el valor del boton que se presiono y
+            lo agrega a la pantalla con la funcion innerHTML y se lo pasa a la funcion añadirNumero
+            cuando digo pantalla me refiero al input que tiene el id pantalla y que es readonly que significa que
+            no se puede escribir en el input y se lo pasa a la funcion añadirNumero para que se pueda escribir en el input
+            la funcion limpiar se encarga de limpiar la pantalla y se lo pasa a la funcion limpiarPantalla 
+        </p>
+    </header>
+    <input type="text" id="pantalla" readonly>
+    <div class="calculadora">
+        <button id="1" class="boton" onclick="añadir(this)">1</button>
+        <button id="2" class="boton" onclick="añadir(this)">2</button>
+        <button id="3" class="boton" onclick="añadir(this)">3</button>
+        <button id="+" class="boton" onclick="añadir(this)">+</button>
+        <button id="4" class="boton" onclick="añadir(this)">4</button>
+        <button id="5" class="boton" onclick="añadir(this)">5</button>
+        <button id="6" class="boton" onclick="añadir(this)">6</button>
+        <button id="-" class="boton" onclick="añadir(this)">-</button>
+        <button id="7" class="boton" onclick="añadir(this)">7</button>
+        <button id="8" class="boton" onclick="añadir(this)">8</button>
+        <button id="9" class="boton" onclick="añadir(this)">9</button>
+        <button id="*" class="boton" onclick="añadir(this)">*</button>
+        <button id="C" class="boton" onclick="limpiar()">C</button>
+        <button id="0" class="boton" onclick="añadir(this)">0</button>
+        <button id="/" class="boton" onclick="añadir(this)">/</button>
+        <button id="=" class="boton" onclick="calcular()">=</button>
+    </div>
+    <script src="cal.js"></script>
+</body>
+</html>
