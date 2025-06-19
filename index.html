@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Para Mi Sara ❤️</title>
+  <script src="https://kit.fontawesome.com/1137027658.js" crossorigin="anonymous"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #f6d365, #fda085);
+    }
+
+    .book {
+      position: relative;
+      width: 350px;
+      height: 500px;
+      transition: transform 0.5s;
+    }
+
+    .paper {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      perspective: 1500px;
+    }
+
+    .front,
+    .back {
+      background: linear-gradient(135deg, #fffaf0, #ffe4e1);
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      transform-origin: left;
+      transition: transform 0.6s;
+      border-radius: 10px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .front {
+      z-index: 1;
+      backface-visibility: hidden;
+      border-left: 4px solid #f08080;
+    }
+
+    .back {
+      z-index: 0;
+    }
+
+    .front-content,
+    .back-content {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      text-align: center;
+      flex-direction: column;
+      color: #4b2e2e;
+    }
+
+    .front-content h1,
+    .back-content h2 {
+      font-family: 'Georgia', cursive;
+    }
+
+    .back-content {
+      transform: rotateY(180deg);
+    }
+
+    .flipped .front,
+    .flipped .back {
+      transform: rotateY(-180deg);
+    }
+
+    button {
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      margin: 10px;
+      transition: transform 0.4s;
+    }
+
+    button:hover i {
+      color: #d35454;
+    }
+
+    i {
+      font-size: 50px;
+      color: #b94e4e;
+    }
+
+    #p1 { z-index: 3; }
+    #p2 { z-index: 2; }
+    #p3 { z-index: 1; }
+
+    img {
+      max-width: 90%;
+      height: auto;
+      display: block;
+      margin: 20px auto 0 auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <button id="prev-btn">
+    <i class="fas fa-arrow-circle-left"></i>
+  </button>
+
+  <div id="book" class="book">
+    <div id="p1" class="paper">
+      <div class="front">
+        <div id="f1" class="front-content">
+          <h1>Para Mi Sara ❤️</h1>
+        </div>
+      </div>
+      <div class="back">
+        <div id="b1" class="back-content">
+          <h2>Eres la persona más importante en este mundo para mí :3</h2>
+        </div>
+      </div>
+    </div>
+
+    <div id="p2" class="paper">
+      <div class="front">
+        <div id="f2" class="front-content">
+          <h2>Te amo con todo mi corazón ❤️</h2>
+        </div>
+      </div>
+      <div class="back">
+        <div id="b2" class="back-content">
+          <h2>Siempre estaré a tu lado, en las buenas y en las malas.</h2>
+        </div>
+      </div>
+    </div>
+
+    <div id="p3" class="paper">
+      <div class="front">
+        <div id="f3" class="front-content">
+          <h2>Recuerda que una nota no define quién eres. Para mí, siempre serás la persona a la que amo ❤️</h2>
+        </div>
+      </div>
+      <div class="back">
+        <div id="b3" class="back-content">
+          <h2>Te amo ❤️</h2>
+          <a href="https://ibb.co/5XL9n0ns" style="width: 80%;">
+            <img src="https://i.ibb.co/Q7McCgCY/Imagen-de-Whats-App-2025-06-14-a-las-19-06-41-556c9f60.jpg" 
+                 alt="Imagen romántica para Sara" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button id="next-btn">
+    <i class="fas fa-arrow-circle-right"></i>
+  </button>
+
+  <script>
+    const prevBtn = document.querySelector("#prev-btn");
+    const nextBtn = document.querySelector("#next-btn");
+    const book = document.querySelector("#book");
+
+    const paper1 = document.querySelector("#p1");
+    const paper2 = document.querySelector("#p2");
+    const paper3 = document.querySelector("#p3");
+
+    let currentLocation = 1;
+    const numOfPapers = 3;
+    const maxLocation = numOfPapers + 1;
+
+    prevBtn.addEventListener("click", goPrevPage);
+    nextBtn.addEventListener("click", goNextPage);
+
+    function openBook() {
+      book.style.transform = "translateX(50%)";
+      prevBtn.style.transform = "translateX(-180px)";
+      nextBtn.style.transform = "translateX(180px)";
+    }
+
+    function closeBook(atStart) {
+      book.style.transform = atStart ? "translateX(0%)" : "translateX(100%)";
+      prevBtn.style.transform = "translateX(0px)";
+      nextBtn.style.transform = "translateX(0px)";
+    }
+
+    function goNextPage() {
+      if (currentLocation < maxLocation) {
+        switch (currentLocation) {
+          case 1:
+            openBook();
+            paper1.classList.add("flipped");
+            paper1.style.zIndex = 1;
+            break;
+          case 2:
+            paper2.classList.add("flipped");
+            paper2.style.zIndex = 2;
+            break;
+          case 3:
+            paper3.classList.add("flipped");
+            paper3.style.zIndex = 3;
+            closeBook(false);
+            break;
+        }
+        currentLocation++;
+      }
+    }
+
+    function goPrevPage() {
+      if (currentLocation > 1) {
+        switch (currentLocation) {
+          case 2:
+            closeBook(true);
+            paper1.classList.remove("flipped");
+            paper1.style.zIndex = 3;
+            break;
+          case 3:
+            paper2.classList.remove("flipped");
+            paper2.style.zIndex = 2;
+            break;
+          case 4:
+            openBook();
+            paper3.classList.remove("flipped");
+            paper3.style.zIndex = 1;
+            break;
+        }
+        currentLocation--;
+      }
+    }
+  </script>
+</body>
+</html>
